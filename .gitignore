@@ -4,6 +4,9 @@
 /node_modules
 /client/node_modules
 /server/node_modules
+/dist
+/.vscode
+/package-lock.json
 /.pnp
 .pnp.js
 

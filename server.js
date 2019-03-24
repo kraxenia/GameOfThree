@@ -1,7 +1,26 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const http = require("http");
+const wss = require('ws');
 
-app.get('/', (req, res) => res.send('Hello World!'))
+//initialize a simple http server
+const server = http.createServer(app);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+//initialize the WebSocket server instance
+const ws = new wss.Server({ server });
+let CLIENTS=[];
+const webSocket = new wss.Server({ port: 8080 });
+
+webSocket.on('connection', function connection(ws) {
+  CLIENTS.push(ws);
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('something');
+});
+
+
+server.listen(process.env.PORT || 3000, () => {
+    console.log(`Server started on port ${server.address().port} :)`);
+});
