@@ -4,10 +4,11 @@ import { ChatService } from "../chat.service";
 
 
 @Component({
-  selector: 'app-request-approval',
+  selector: 'request-approval',
   templateUrl: './request-approval.component.html',
   styleUrls: ['./request-approval.component.css']
 })
+
 export class RequestApprovalComponent implements OnInit {
   @Input() clientId: any;
   @Input() applicant: any;

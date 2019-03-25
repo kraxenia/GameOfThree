@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {$WebSocket} from 'angular2-websocket/angular2-websocket';
 import { ChatService } from "./chat.service";
 import {ConditionType} from './conditionEnum';
 
@@ -10,25 +9,32 @@ import {ConditionType} from './conditionEnum';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private condition = ConditionType.Idle;
-  private clientId = -1;
-  public numbers = [];
-  public error = '';
+  private condition: ConditionType = ConditionType.Idle;
+  private clientId: number = -1;
+  public numbers: Array<number> = [];
+  public error: string = '';
+  public isInitiator: boolean = false;
+  public opponent: number = -1;
+  public isWaiting: boolean;
 
   constructor(private chatService: ChatService) {
 
     chatService.messages.subscribe(msg => {
       this.error = '';
       this.clientId = msg.recipient;
+      this.isInitiator = false;
       switch(msg.type) {
-
         case 'sendRequest': 
           this.condition = ConditionType.RequestSent;
+          this.isWaiting = true;
           break;
         case 'sendNumber':
-          this.numbers.push(msg.message);
+          this.numbers.push(parseInt(msg.message));
         case 'sendAnswer':
+          this.isWaiting = false;
           this.condition = msg.message == 'true' ? ConditionType.Game : ConditionType.Idle;
+          this.isInitiator = true;
+          this.opponent = msg.author;
           break;
       }
     });

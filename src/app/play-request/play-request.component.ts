@@ -7,7 +7,8 @@ import { ChatService } from "../chat.service";
   styleUrls: ['./play-request.component.css']
 })
 export class PlayRequestComponent implements OnInit {
-  @Input() clientId: any;
+  @Input() clientId: number;
+  @Input() isWaiting: boolean;
   public opponent: number;
 
   private message = {

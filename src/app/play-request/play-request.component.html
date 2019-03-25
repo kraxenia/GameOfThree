@@ -2,7 +2,7 @@
   <label for="choose-player">Please choose your player:</label>
   <input type="text" name="choosePlayer" id="choose-player" type="number" [(ngModel)]="opponent"><br>
   <button (click)="sendRequest(opponent)">Send Request</button>
-  <div class="spinner-border" role="status">
+  <div class="spinner-border" role="status" *ngIf="isWaiting">
     <span class="sr-only">Loading...</span>
   </div>
 </form>

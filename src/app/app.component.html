@@ -1,6 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>Your Id is: {{clientId}}</div>
 <div *ngIf="error">{{error}}</div>
-<play-request *ngIf="condition == 0" clientId="{{clientId}}"></play-request>
-<request-approval *ngIf="condition == 1"></request-approval>
-<game-process *ngIf="condition == 2"></game-process>
+<play-request *ngIf="condition == 0" clientId="{{clientId}}" isWaiting="{{isWaiting}}"></play-request>
+<request-approval *ngIf="condition == 1" clientId="{{clientId}}"></request-approval>
+<game-process *ngIf="condition == 2" clientId="{{clientId}}" numbers="{{numbers}}" 
+isInitiator="{{isInitiator}}" opponent="{{opponent}}"></game-process>

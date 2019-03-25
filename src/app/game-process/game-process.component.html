@@ -1,3 +1,9 @@
-<p>
-  game-process works!
-</p>
+
+  <button (click)="isAutoPlay = true" disabled]="isAutoPlay">Autoplay</button>
+  <form>
+    <label for="set-number">Net Turn:</label>
+    <input type="text" name="setNumber" id="set-number" type="number" [(ngModel)]="chosenNum"/>
+    <br>
+    <button (click)="makeTurn(chosenNum)">Make turn</button>
+  </form>
+
