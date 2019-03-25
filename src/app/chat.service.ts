@@ -6,8 +6,10 @@ import { WebsocketService } from "./websocket.service";
 const CHAT_URL = "ws://localhost:8080";
 
 export interface Message {
-  author: string;
+  author: number;
+  recipient: number;
   message: string;
+  type: string;
 }
 
 @Injectable()
@@ -17,11 +19,13 @@ export class ChatService {
   constructor(wsService: WebsocketService) {
     this.messages = <Subject<Message>>wsService.connect(CHAT_URL).pipe(map(
       (response: MessageEvent): Message => {
-        // let data = JSON.parse(response.data);
-        // return {
-        //   author: data.author,
-        //   message: data.message
-        // };
+        let data = JSON.parse(response.data);
+        return {
+          author: data.author,
+          message: data.message,
+          type: data.type,
+          recipient: data.recipient
+        };
         return response.data;
       }
     ));

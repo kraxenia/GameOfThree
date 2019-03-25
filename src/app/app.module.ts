@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';  //<<<< import it here
 import { AppComponent } from './app.component';
 import { PlayRequestComponent } from './play-request/play-request.component';
 import { RequestApprovalComponent } from './request-approval/request-approval.component';
@@ -16,7 +17,7 @@ import { ChatService} from "./chat.service";
     GameProcessComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, FormsModule
   ],
   providers: [WebsocketService, ChatService],
   bootstrap: [AppComponent]

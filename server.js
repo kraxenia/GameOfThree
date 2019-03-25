@@ -15,9 +15,10 @@ webSocket.on('connection', function connection(ws) {
   CLIENTS.push(ws);
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
+    CLIENTS[message.recipient].send(message);
   });
 
-  ws.send('something');
+  ws.send(JSON.stringify({recipient: CLIENTS.length-1}));
 });
 
 
