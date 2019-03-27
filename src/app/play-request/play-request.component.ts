@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from "../chat.service";
+import {Message} from '../common'
 
 @Component({
   selector: 'play-request',
@@ -11,13 +12,6 @@ export class PlayRequestComponent implements OnInit {
   @Input() isWaiting: boolean;
   public opponent: number;
 
-  private message = {
-    author: -1,
-    message: "this is a test message",
-    recipient: -1,
-    type: 'sendRequest'
-  };
-
   constructor(private chatService: ChatService) {
 
   }
@@ -25,10 +19,14 @@ export class PlayRequestComponent implements OnInit {
   ngOnInit() {
   }
 
+  isValid(){
+    return !(this.opponent !== undefined && this.clientId !== undefined && this.opponent == this.clientId);
+  }
+
   sendRequest(opponent){
-    this.message.author = this.clientId;
-    this.message.recipient = opponent;
-    this.chatService.messages.next(this.message);
+    let msg = new Message(this.clientId, opponent,'','sendRequest')
+    this.isWaiting = true;
+    this.chatService.messages.next(msg);
   }
 
 }

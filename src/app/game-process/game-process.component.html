@@ -1,9 +1,20 @@
 
-  <button (click)="isAutoPlay = true" disabled]="isAutoPlay">Autoplay</button>
-  <form>
-    <label for="set-number">Net Turn:</label>
-    <input type="text" name="setNumber" id="set-number" type="number" [(ngModel)]="chosenNum"/>
-    <br>
-    <button (click)="makeTurn(chosenNum)">Make turn</button>
+  <button (click)="isAutoPlay = true" [disabled]="isAutoPlay" class="auto-play">Autoplay</button>
+  <br>
+  <div class="game">
+    <div *ngFor="let number of numbers; let i = index">
+      {{number}}
+    </div>
+  </div>
+
+  <form class="set-number">
+    <label for="set-number">Your Turn:</label>
+    <button (click)="makeTurn(-1)" [disabled]="isWaiting">-1</button>
+    <button (click)="makeTurn(0)" [disabled]="isWaiting">0</button>
+    <button (click)="makeTurn(1)" [disabled]="isWaiting">+1</button>
   </form>
+
+  <div class="spinner-border" role="status" *ngIf="isWaiting">
+      <span class="sr-only">Loading...</span>
+  </div>
 

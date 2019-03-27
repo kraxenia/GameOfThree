@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Message } from '../common';
 import { ChatService } from "../chat.service";
 
@@ -12,13 +12,17 @@ import { ChatService } from "../chat.service";
 export class RequestApprovalComponent implements OnInit {
   @Input() clientId: any;
   @Input() applicant: any;
+  @Output() answer: EventEmitter<any> = new EventEmitter();
+
 
   constructor(private chatService: ChatService) {
 
   }
 
-  sendAnswer(answer) {
-    let msg = new Message(this.clientId, this.applicant, answer, 'sendAnswer');
+  sendResponse(response) {
+    this.answer.emit(response);
+
+    let msg = new Message(this.clientId, this.applicant, response, 'sendResponse');
     this.chatService.messages.next(msg);
   }
 

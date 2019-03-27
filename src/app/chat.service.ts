@@ -8,7 +8,7 @@ const CHAT_URL = "ws://localhost:8080";
 export interface Message {
   author: number;
   recipient: number;
-  message: string;
+  message: any;
   type: string;
 }
 

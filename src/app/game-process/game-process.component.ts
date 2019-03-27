@@ -13,6 +13,10 @@ export class GameProcessComponent implements OnInit, OnChanges {
   @Input() numbers: Array<number>;
   @Input() isInitiator: boolean;
   @Input() opponent: number;
+  @Input() isWaiting: boolean;
+
+
+
   private isAutoplay: boolean;
   private lastNumber: number;
   private isWinner: boolean;
@@ -57,12 +61,13 @@ export class GameProcessComponent implements OnInit, OnChanges {
     return num % 3 == 0;
   }
 
-  makeTurn(num) {
+  makeTurn(addition) {
+    let num = this.numbers[this.numbers.length-1] + addition;
     if (!this.isLegitNumber(num)){
       this.error = 'The number is not legit. Please, choose a number which is divisible by 3';
       return;
     }
-    this.setNumber(num);
+    this.setNumber(num/3);
   }
 
   setNumber(num){
@@ -71,6 +76,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
       this.isWinner = true;
     }
     this.numbers.push(this.lastNumber);
+    this.isWaiting = true;
     this.sendNumber(this.lastNumber);
   }
 
