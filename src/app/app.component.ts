@@ -9,15 +9,13 @@ import { Globals } from '../globals';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private condition: ConditionType = ConditionType.Idle;
+  public condition: ConditionType = ConditionType.Idle;
   public clientId: number;
   public numbers: Array<number> = new Array<number>();
   public isInitiator: boolean = false;
   public opponent: number;
-  //public isWaiting: boolean;
 
-  constructor(private chatService: ChatService, 
-    private globals: Globals ) {
+  constructor(private chatService: ChatService, public globals: Globals ) {
 
     chatService.messages.subscribe(msg => {
       globals.error = '';

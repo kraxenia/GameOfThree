@@ -16,16 +16,16 @@ export class GameProcessComponent implements OnInit, OnChanges {
   @Input() opponent: number;
   @Output() replay: EventEmitter<any> =  new EventEmitter();
 
-  private isAutoplay: boolean;
+  public isAutoplay: boolean;
   private lastNumber: number;
-  private isWinner: boolean;
+  public isWinner: boolean;
   private isCreateNumberEnabled: boolean;
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min; 
   }
 
-  constructor(private chatService: ChatService, private globals: Globals) {
+  constructor(private chatService: ChatService, public globals: Globals) {
 
   }
 

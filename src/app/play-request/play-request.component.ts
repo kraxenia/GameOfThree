@@ -13,7 +13,7 @@ export class PlayRequestComponent implements OnInit {
   public opponent: number;
   public
 
-  constructor(private chatService: ChatService, private globals: Globals) {
+  constructor(private chatService: ChatService, public globals: Globals) {
 
   }
 
