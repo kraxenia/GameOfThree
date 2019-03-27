@@ -9,12 +9,21 @@
 
   <form class="set-number">
     <label for="set-number">Your Turn:</label>
-    <button (click)="makeTurn(-1)" [disabled]="isWaiting">-1</button>
-    <button (click)="makeTurn(0)" [disabled]="isWaiting">0</button>
-    <button (click)="makeTurn(1)" [disabled]="isWaiting">+1</button>
+    <button (click)="makeTurn(-1)" [disabled]="globals.isWaiting || isWinner !== undefined">-1</button>
+    <button (click)="makeTurn(0)" [disabled]="globals.isWaiting || isWinner !== undefined">0</button>
+    <button (click)="makeTurn(1)" [disabled]="globals.isWaiting || isWinner !== undefined">+1</button>
   </form>
 
-  <div class="spinner-border" role="status" *ngIf="isWaiting">
+
+
+  <div class="spinner-border" role="status" *ngIf="globals.isWaiting && !isWinner">
       <span class="sr-only">Loading...</span>
   </div>
 
+ <div *ngIf="isWinner">
+   You are the winner! Congratulations!
+ </div>
+ <div *ngIf="isWinner === false">
+   You have lost :(
+  <button (click)="replayTheGame()">Replay</button>
+ </div>

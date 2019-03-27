@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { ChatService } from "../chat.service";
-import { Message } from '../common'
+import { Message } from '../common';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'game-process',
@@ -13,9 +14,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
   @Input() numbers: Array<number>;
   @Input() isInitiator: boolean;
   @Input() opponent: number;
-  @Input() isWaiting: boolean;
-
-
+  @Output() replay: EventEmitter<any> =  new EventEmitter();
 
   private isAutoplay: boolean;
   private lastNumber: number;
@@ -23,11 +22,11 @@ export class GameProcessComponent implements OnInit, OnChanges {
   private isCreateNumberEnabled: boolean;
   private error:  string;
 
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (+max - +min)) + +min; 
   }
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private globals: Globals) {
 
   }
 
@@ -53,7 +52,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
 
   createNumber(isFirstTime){
     let arrLength = this.numbers.length;
-    let number = isFirstTime ? this.getRandomInt(100) : this.createLegitNumber(this.numbers[arrLength-1]);
+    let number = isFirstTime ? this.getRandomInt(1, 40) : this.createLegitNumber(this.numbers[arrLength-1]);
     this.setNumber(number);
   }
 
@@ -76,8 +75,12 @@ export class GameProcessComponent implements OnInit, OnChanges {
       this.isWinner = true;
     }
     this.numbers.push(this.lastNumber);
-    this.isWaiting = true;
+    this.globals.isWaiting = true;
     this.sendNumber(this.lastNumber);
+  }
+
+  replayTheGame(){
+    this.replay.emit(null);
   }
 
   ngOnChanges(changes) {
@@ -86,7 +89,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
         return;
       }
 
-      if (this.numbers[length-1] == 1) {
+      if (changes.numbers.currentValue[length-1] == 1) {
         this.isWinner = false;
       }
 

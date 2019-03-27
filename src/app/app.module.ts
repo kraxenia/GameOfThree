@@ -8,6 +8,7 @@ import { RequestApprovalComponent } from './request-approval/request-approval.co
 import { GameProcessComponent } from './game-process/game-process.component';
 import { WebsocketService } from "./websocket.service";
 import { ChatService} from "./chat.service";
+import { Globals } from '../globals';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { ChatService} from "./chat.service";
   imports: [
     BrowserModule, FormsModule
   ],
-  providers: [WebsocketService, ChatService],
+  providers: [WebsocketService, ChatService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

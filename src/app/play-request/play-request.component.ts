@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from "../chat.service";
-import {Message} from '../common'
+import {Message} from '../common';
+import { Globals } from '../../globals';
 
 @Component({
   selector: 'play-request',
@@ -9,10 +10,9 @@ import {Message} from '../common'
 })
 export class PlayRequestComponent implements OnInit {
   @Input() clientId: number;
-  @Input() isWaiting: boolean;
   public opponent: number;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private globals: Globals) {
 
   }
 
@@ -25,7 +25,7 @@ export class PlayRequestComponent implements OnInit {
 
   sendRequest(opponent){
     let msg = new Message(this.clientId, opponent,'','sendRequest')
-    this.isWaiting = true;
+    this.globals.isWaiting = true;
     this.chatService.messages.next(msg);
   }
 
