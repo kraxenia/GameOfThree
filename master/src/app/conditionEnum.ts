@@ -1,6 +1,7 @@
 export enum ConditionType {
     Idle,
-    RequestSent,
+    WaitingForApproval,
+    NeedsToApprove,
     Game
 }
     

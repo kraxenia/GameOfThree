@@ -12,7 +12,6 @@ export class AppComponent {
   private condition: ConditionType = ConditionType.Idle;
   public clientId: number;
   public numbers: Array<number> = new Array<number>();
-  public error: string = '';
   public isInitiator: boolean = false;
   public opponent: number;
   //public isWaiting: boolean;
@@ -21,7 +20,7 @@ export class AppComponent {
     private globals: Globals ) {
 
     chatService.messages.subscribe(msg => {
-      this.error = '';
+      globals.error = '';
       this.clientId = msg.recipient;
       this.isInitiator = false;
       this.opponent = msg.author;
@@ -29,15 +28,27 @@ export class AppComponent {
 
       switch(msg.type) {
         case 'sendRequest': 
-          this.condition = ConditionType.RequestSent;
-          break;
+          if (!(this.condition == ConditionType.Idle && !globals.isWaiting)){
+            return;
+          }
+          this.condition = ConditionType.NeedsToApprove;
+          setTimeout(() => {
+            this.condition = ConditionType.Idle;
+          }, 20000);       
+        break;
         case 'sendNumber':
-          this.condition = ConditionType.Game
+          if (this.condition != ConditionType.Game){
+            return;
+          }
+          this.condition = ConditionType.Game;
           this.numbers.push(parseInt(msg.message));
           this.numbers = this.numbers.slice();
           break;
         case 'sendResponse':
-          this.error = msg.message === false ? 'Your request has been declined. Try Again.' : '';
+          if (this.condition != ConditionType.Idle) {
+            return;
+          }
+          this.globals.error = msg.message === false ? 'Your request has been declined. Try Again.' : '';
           this.isInitiator = true;
           this.condition = msg.message === true ? ConditionType.Game : ConditionType.Idle;
           break;

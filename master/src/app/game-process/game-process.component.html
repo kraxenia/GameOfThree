@@ -25,5 +25,7 @@
  </div>
  <div *ngIf="isWinner === false">
    You have lost :(
-  <button (click)="replayTheGame()">Replay</button>
  </div>
+
+ <button (click)="replayTheGame()" *ngIf="isWinner !== undefined" >Replay</button>
+

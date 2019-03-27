@@ -11,6 +11,7 @@ import { Globals } from '../../globals';
 export class PlayRequestComponent implements OnInit {
   @Input() clientId: number;
   public opponent: number;
+  public
 
   constructor(private chatService: ChatService, private globals: Globals) {
 
@@ -24,9 +25,13 @@ export class PlayRequestComponent implements OnInit {
   }
 
   sendRequest(opponent){
-    let msg = new Message(this.clientId, opponent,'','sendRequest')
+    let msg = new Message(this.clientId, opponent,'','sendRequest');
     this.globals.isWaiting = true;
     this.chatService.messages.next(msg);
+    setTimeout(() => {
+        this.globals.isWaiting = false;
+        this.globals.error = 'No response from the player. Please try again.'
+   }, 30000);
   }
 
 }

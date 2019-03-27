@@ -20,7 +20,6 @@ export class GameProcessComponent implements OnInit, OnChanges {
   private lastNumber: number;
   private isWinner: boolean;
   private isCreateNumberEnabled: boolean;
-  private error:  string;
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min; 
@@ -63,7 +62,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
   makeTurn(addition) {
     let num = this.numbers[this.numbers.length-1] + addition;
     if (!this.isLegitNumber(num)){
-      this.error = 'The number is not legit. Please, choose a number which is divisible by 3';
+      this.globals.error = 'The number is not legit. Please, choose a number which is divisible by 3';
       return;
     }
     this.setNumber(num/3);

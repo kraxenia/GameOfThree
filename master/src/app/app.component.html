@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>Your Id is: {{clientId}}</div>
-<div *ngIf="error" class="text-danger">{{error}}</div>
+<div *ngIf="globals.error" class="text-danger">{{globals.error}}</div>
 <play-request *ngIf="condition == 0" [clientId]="clientId">
 </play-request>
 <request-approval *ngIf="condition == 1" [clientId]="clientId" (answer)="onAnswer($event)"
