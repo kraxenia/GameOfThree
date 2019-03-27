@@ -10,10 +10,10 @@ import { Globals } from '../globals';
 })
 export class AppComponent {
   public condition: ConditionType = ConditionType.Idle;
-  public clientId: number;
+  public clientId: any;
   public numbers: Array<number> = new Array<number>();
   public isInitiator: boolean = false;
-  public opponent: number;
+  public opponent: any;
 
   constructor(private chatService: ChatService, public globals: Globals ) {
 
@@ -29,11 +29,8 @@ export class AppComponent {
           if (!(this.condition == ConditionType.Idle && !globals.isWaiting)){
             return;
           }
-          this.condition = ConditionType.NeedsToApprove;
-          setTimeout(() => {
-            this.condition = ConditionType.Idle;
-          }, 20000);       
-        break;
+          this.condition = ConditionType.NeedsToApprove;    
+          break;
         case 'sendNumber':
           if (this.condition != ConditionType.Game){
             return;
@@ -50,16 +47,19 @@ export class AppComponent {
           this.isInitiator = true;
           this.condition = msg.message === true ? ConditionType.Game : ConditionType.Idle;
           break;
+        case 'isError':
+          globals.error = msg.message;
       }
     });
   }
 
   onAnswer(response){
-    this.condition = response == 'true' ? ConditionType.Game : ConditionType.Idle;      
+    this.condition = response ? ConditionType.Game : ConditionType.Idle;      
   }
 
   onReplay(){
     this.condition = ConditionType.Idle;
+    this.numbers = new Array<number>();
   }
   
 }

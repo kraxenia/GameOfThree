@@ -1,11 +1,6 @@
-<div class="text-danger" *ngIf="!isValid()">The opponent can not have the same id as yours</div>
+<div class="text-danger" *ngIf="opponent === clientId">The opponent can not have the same id as yours</div>
 <form *ngIf="!globals.isWaiting">
   <label for="choose-player">Please choose your opponent:</label>
-  <input type="text" name="choosePlayer" id="choose-player" type="number" 
-  [(ngModel)]="opponent"><br>
+  <input type="text" name="choosePlayer" id="choose-player" [(ngModel)]="opponent" class="choose-player"><br>
   <button (click)="sendRequest(opponent)" [disabled]="!isValid()">Send Request</button>
 </form>
-
-<div class="spinner-border" role="status" *ngIf="globals.isWaiting">
-  <span class="sr-only">Loading...</span>
-</div>

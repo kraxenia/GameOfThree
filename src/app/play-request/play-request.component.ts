@@ -9,9 +9,8 @@ import { Globals } from '../../globals';
   styleUrls: ['./play-request.component.css']
 })
 export class PlayRequestComponent implements OnInit {
-  @Input() clientId: number;
-  public opponent: number;
-  public
+  @Input() clientId: any;
+  public opponent: any;
 
   constructor(private chatService: ChatService, public globals: Globals) {
 
@@ -28,10 +27,10 @@ export class PlayRequestComponent implements OnInit {
     let msg = new Message(this.clientId, opponent,'','sendRequest');
     this.globals.isWaiting = true;
     this.chatService.messages.next(msg);
-    setTimeout(() => {
-        this.globals.isWaiting = false;
-        this.globals.error = 'No response from the player. Please try again.'
-   }, 30000);
+  //   setTimeout(() => {
+  //       this.globals.isWaiting = false;
+  //       this.globals.error = 'No response from the player. Please try again.'
+  //  }, 120000);
   }
 
 }

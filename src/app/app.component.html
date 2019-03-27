@@ -1,10 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>Your Id is: {{clientId}}</div>
-<div *ngIf="globals.error" class="text-danger">{{globals.error}}</div>
-<play-request *ngIf="condition == 0" [clientId]="clientId">
-</play-request>
-<request-approval *ngIf="condition == 1" [clientId]="clientId" (answer)="onAnswer($event)"
-[applicant]="opponent">
-</request-approval>
-<game-process *ngIf="condition == 2" [clientId]="clientId" [numbers]="numbers" 
-[isInitiator]="isInitiator" [opponent]="opponent" (replay)="onReplay($event)"></game-process>
+<div *ngIf="clientId">
+    <div>Your Id is: {{clientId}}</div>
+    <div class="spinner-border" role="status" [hidden]="!globals.isWaiting">
+            <span class="sr-only">Loading...</span>
+    </div>
+    <div *ngIf="globals.error" class="text-danger">{{globals.error}}</div>
+    <play-request *ngIf="condition == 0" [clientId]="clientId">
+    </play-request>
+    <request-approval *ngIf="condition == 1" [clientId]="clientId" (answer)="onAnswer($event)"
+    [applicant]="opponent">
+    </request-approval>
+    <game-process *ngIf="condition == 2" [clientId]="clientId" [numbers]="numbers" 
+    [isInitiator]="isInitiator" [opponent]="opponent" (replay)="onReplay($event)"></game-process>
+</div>
+<div *ngIf="clientId === undefined">
+    Something wrong. Try to refresh the page
+</div>

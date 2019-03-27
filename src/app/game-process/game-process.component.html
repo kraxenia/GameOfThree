@@ -1,24 +1,18 @@
 
-  <button (click)="isAutoplay = true" [disabled]="isAutoplay" class="auto-play">Autoplay</button>
+  <button (click)="isAutoplay = true; makeTurn();" [disabled]="isAutoplay || globals.isWaiting" class="auto-play">Autoplay</button>
   <br>
   <div class="game" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div *ngFor="let number of numbers; let i = index">
-      {{number}}
+      <span *ngIf="i>0">{{number*3}}/3= </span>  {{number}}
     </div>
   </div>
 
   <form class="set-number">
     <label for="set-number">Your Turn:</label>
-    <button (click)="makeTurn(-1)" [disabled]="globals.isWaiting || isWinner !== undefined">-1</button>
-    <button (click)="makeTurn(0)" [disabled]="globals.isWaiting || isWinner !== undefined">0</button>
-    <button (click)="makeTurn(1)" [disabled]="globals.isWaiting || isWinner !== undefined">+1</button>
+    <button (click)="makeTurn(-1)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">-1</button>
+    <button (click)="makeTurn(0)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">0</button>
+    <button (click)="makeTurn(1)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">+1</button>
   </form>
-
-
-
-  <div class="spinner-border" role="status" *ngIf="globals.isWaiting && !isWinner">
-      <span class="sr-only">Loading...</span>
-  </div>
 
  <div *ngIf="isWinner">
    You are the winner! Congratulations!
@@ -26,6 +20,9 @@
  <div *ngIf="isWinner === false">
    You have lost :(
  </div>
+<div *ngIf="isTimeout">
+    No response from the opponent. Please restart.  
+</div>
 
- <button (click)="replayTheGame()" *ngIf="isWinner !== undefined" >Replay</button>
+ <button (click)="replayTheGame()" *ngIf="isWinner !== undefined || isTimeout" >Replay</button>
 

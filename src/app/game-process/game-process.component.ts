@@ -10,16 +10,17 @@ import { Globals } from '../../globals';
 })
 export class GameProcessComponent implements OnInit, OnChanges {
 
-  @Input() clientId: number;
+  @Input() clientId: any;
   @Input() numbers: Array<number>;
   @Input() isInitiator: boolean;
-  @Input() opponent: number;
+  @Input() opponent: any;
   @Output() replay: EventEmitter<any> =  new EventEmitter();
 
   public isAutoplay: boolean;
+  public isTimeout: boolean = false;
   private lastNumber: number;
+  private wasResponse: boolean;
   public isWinner: boolean;
-  private isCreateNumberEnabled: boolean;
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (+max - +min)) + +min; 
@@ -32,6 +33,12 @@ export class GameProcessComponent implements OnInit, OnChanges {
   sendNumber(number) {
     let msg = new Message(this.clientId, this.opponent, number, 'sendNumber');
     this.chatService.messages.next(msg);
+    this.wasResponse = false;
+    setTimeout(()=>{
+      if (!this.wasResponse && this.isWinner === undefined) {
+        this.isTimeout = true;
+      }
+    }, 120000)
   }
 
   ngOnInit() {
@@ -50,8 +57,14 @@ export class GameProcessComponent implements OnInit, OnChanges {
   }
 
   createNumber(isFirstTime){
+    if (this.isWinner !== undefined){
+      return;
+    }
     let arrLength = this.numbers.length;
     let number = isFirstTime ? this.getRandomInt(1, 40) : this.createLegitNumber(this.numbers[arrLength-1]);
+    if (number == 0){
+      debugger
+    }
     this.setNumber(number);
   }
 
@@ -60,11 +73,17 @@ export class GameProcessComponent implements OnInit, OnChanges {
   }
 
   makeTurn(addition) {
+    if (this.isAutoplay) {
+      this.createNumber(false);
+      return;
+    }
+
     let num = this.numbers[this.numbers.length-1] + addition;
     if (!this.isLegitNumber(num)){
       this.globals.error = 'The number is not legit. Please, choose a number which is divisible by 3';
       return;
     }
+    this.globals.error = '';
     this.setNumber(num/3);
   }
 
@@ -73,8 +92,10 @@ export class GameProcessComponent implements OnInit, OnChanges {
     if (this.lastNumber == 1){
       this.isWinner = true;
     }
+    else {
+      this.globals.isWaiting = true;
+    }
     this.numbers.push(this.lastNumber);
-    this.globals.isWaiting = true;
     this.sendNumber(this.lastNumber);
   }
 
@@ -88,15 +109,14 @@ export class GameProcessComponent implements OnInit, OnChanges {
         return;
       }
 
+      this.wasResponse = true;
+
       if (changes.numbers.currentValue[length-1] == 1) {
         this.isWinner = false;
       }
 
       if (this.isAutoplay) {
           this.createNumber(false);
-      }   
-      else {
-        this.isCreateNumberEnabled = true;
       }
   }
 
