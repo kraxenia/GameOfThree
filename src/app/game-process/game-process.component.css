@@ -2,7 +2,12 @@
     float: right;
 }
 
+.game{
+    max-height: 100px;
+    overflow-y: 100%;
+    height: xyz;
+}
+
 .set-number{
     float: left;
-    overflow:scroll;
 }

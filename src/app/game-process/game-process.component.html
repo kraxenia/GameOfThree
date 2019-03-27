@@ -1,7 +1,7 @@
 
   <button (click)="isAutoPlay = true" [disabled]="isAutoPlay" class="auto-play">Autoplay</button>
   <br>
-  <div class="game">
+  <div class="game" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div *ngFor="let number of numbers; let i = index">
       {{number}}
     </div>
