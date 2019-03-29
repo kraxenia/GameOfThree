@@ -1,7 +1,7 @@
 {
   "name": "angular-io-example",
   "engines": {
-    "node": ">=50.9",
+    "node": "10.3.0",
     "npm": ">=6.0.0"
   },
   "version": "1.0.0",
