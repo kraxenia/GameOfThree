@@ -10,7 +10,7 @@ const server = http.createServer(app);
 //initialize the WebSocket server instance
 const ws = new wss.Server({ server });
 let CLIENTS={};
-const webSocket = new wss.Server({ port: process.env.PORT || 8080 });
+const webSocket = new wss.Server({ port: process.env.PORT || 5000 });
 
 webSocket.on('connection', function connection(ws) {
   ws.id = uuid.v4();
