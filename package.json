@@ -9,7 +9,7 @@
   "description": "Example project from an angular.io guide.",
   "scripts": {
     "postinstall": "ng build --aot --prod",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build --prod",
     "ng": "ng"
   },
