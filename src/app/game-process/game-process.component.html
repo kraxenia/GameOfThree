@@ -4,7 +4,7 @@
   <div class="box3 sb13">I'm speech bubble</div>
   <div class="box3 sb14">I'm speech bubble</div>--->
 
-  <div class="game" style="overflow-y: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div class="game"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div *ngFor="let number of numbers; let i = index" class="box3" [ngClass]="{
           'sb13 client': (isInitiator && i%2==0) || (!isInitiator && i%2==1),
           'sb14 opponent' : (!isInitiator && i%2==0 || isInitiator && i%2==1)
