@@ -41,6 +41,12 @@ export class GameProcessComponent implements OnInit, OnChanges {
     }, 120000)
   }
 
+  createTurnStr(num, i){
+    let str = i!=0 ? `${num}*3/3=` : "";
+    str+=num;
+    return str;
+  }
+
   ngOnInit() {
     if (!this.isInitiator) {
       return;
@@ -61,7 +67,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
       return;
     }
     let arrLength = this.numbers.length;
-    let number = isFirstTime ? this.getRandomInt(1, 40) : this.createLegitNumber(this.numbers[arrLength-1]);
+    let number = isFirstTime ? this.getRandomInt(1, 1000) : this.createLegitNumber(this.numbers[arrLength-1]);
     if (number == 0){
       debugger
     }

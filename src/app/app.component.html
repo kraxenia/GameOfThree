@@ -1,10 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div *ngIf="clientId">
-    <div>Your Id is: {{clientId}}</div>
+
+    <form class="col-md-9">
+    <label>Your Id is:</label><label class="client-id">{{clientId}}</label> 
+    <button (click)="copyMessage(clientId)" class="col-sm-1 ">Copy</button>
+    </form>
     <div class="spinner-border" role="status" [hidden]="!globals.isWaiting">
             <span class="sr-only">Loading...</span>
     </div>
     <div *ngIf="globals.error" class="text-danger">{{globals.error}}</div>
+    <br>
+    <br>
     <play-request *ngIf="condition == 0" [clientId]="clientId">
     </play-request>
     <request-approval *ngIf="condition == 1" [clientId]="clientId" (answer)="onAnswer($event)"

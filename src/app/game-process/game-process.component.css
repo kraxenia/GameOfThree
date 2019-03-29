@@ -1,13 +1,88 @@
 .auto-play, .game{
     float: right;
 }
-
-.game{
-    max-height: 100px;
-    overflow-y: 100%;
-    height: xyz;
+.btn-choice{
+  width: 40px;
+  margin-right: 20px;
 }
 
 .set-number{
     float: left;
 }
+
+/*bubbles*/
+.game {
+  max-height: 100px;
+  overflow-y: 40%;
+  height: xyz;
+  margin: 0px;
+  padding: 0px;
+}
+
+  
+ .box3 {
+    width: 300px;
+    margin: 50px auto;
+    border-radius: 15px;
+    background: #00bfb6;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-weight: 900;
+    font-family: arial;
+    position: relative;
+  }
+  
+  
+  /* speech bubble 13 */
+  
+.sb13:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid #00bfb6;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #00bfb6;
+    border-bottom: 15px solid transparent;
+    right: -16px;
+    top: 0px;
+  }
+  
+  
+  /* speech bubble 14 */
+  
+.sb14:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-right: 15px solid #00bfb6;
+    border-top: 15px solid #00bfb6;
+    border-bottom: 15px solid transparent;
+    left: -16px;
+    top: 0px;
+  }
+  
+  
+  
+  
+  /* youtube link */
+.youtube{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 160px;
+    text-align: center;
+    padding: 15px 10px;
+    background: #bb0000;
+    border-radius: 5px;
+  }
+  
+.youtube a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }

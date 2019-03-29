@@ -20,17 +20,13 @@ export class PlayRequestComponent implements OnInit {
   }
 
   isValid(){
-    return !(this.opponent !== undefined && this.clientId !== undefined && this.opponent == this.clientId);
+    return this.opponent  && this.opponent != this.clientId;
   }
 
   sendRequest(opponent){
     let msg = new Message(this.clientId, opponent,'','sendRequest');
     this.globals.isWaiting = true;
     this.chatService.messages.next(msg);
-  //   setTimeout(() => {
-  //       this.globals.isWaiting = false;
-  //       this.globals.error = 'No response from the player. Please try again.'
-  //  }, 120000);
   }
 
 }

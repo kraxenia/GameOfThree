@@ -19,6 +19,10 @@ export class WebsocketService {
   private create(url): Subject<MessageEvent> {
     let ws = new WebSocket(url);
 
+    window.onbeforeunload = function() {
+      ws.close();
+    };
+
     let observable = Observable.create((obs: Observer<MessageEvent>) => {
       ws.onmessage = obs.next.bind(obs);
       ws.onerror = obs.error.bind(obs);

@@ -1,17 +1,22 @@
 
   <button (click)="isAutoplay = true; makeTurn();" [disabled]="isAutoplay || globals.isWaiting" class="auto-play">Autoplay</button>
   <br>
+
+  <!-----
+  <div class="box3 sb13">I'm speech bubble</div>
+  <div class="box3 sb14">I'm speech bubble</div>--->
+
   <div class="game" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div *ngFor="let number of numbers; let i = index">
-      <span *ngIf="i>0">{{number*3}}/3= </span>  {{number}}
+        <div class="box3" [ngClass]="(i%2==0)?'sb13':'sb14'">{{createTurnStr(number, i)}}</div>
     </div>
   </div>
 
   <form class="set-number">
-    <label for="set-number">Your Turn:</label>
-    <button (click)="makeTurn(-1)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">-1</button>
-    <button (click)="makeTurn(0)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">0</button>
-    <button (click)="makeTurn(1)" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">+1</button>
+    <label for="set-number" class="col-sm-2">Your Turn:</label>
+    <button (click)="makeTurn(-1)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">-1</button>
+    <button (click)="makeTurn(0)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">0</button>
+    <button (click)="makeTurn(1)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">+1</button>
   </form>
 
  <div *ngIf="isWinner">
