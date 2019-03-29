@@ -8,6 +8,7 @@
   "private": true,
   "description": "Example project from an angular.io guide.",
   "scripts": {
+    "postinstall": "ng build --aot --prod",
     "start": "ng serve",
     "build": "ng build --prod",
     "ng": "ng"
