@@ -8,11 +8,11 @@
   "private": true,
   "description": "Example project from an angular.io guide.",
   "scripts": {
-    "lint": "tslint ./src/**/*.ts -t verbose",
+    //"lint": "tslint ./src/**/*.ts -t verbose",
     "start": "ng serve",
-    "test": "ng test",
+    //"test": "ng test",
     "build": "ng build --prod",
-    "e2e": "ng e2e",
+    //"e2e": "ng e2e",
     "ng": "ng"
   },
   "keywords": [],
