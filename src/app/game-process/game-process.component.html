@@ -1,33 +1,43 @@
 
-  <button (click)="isAutoplay = true; makeTurn();" [disabled]="isAutoplay || globals.isWaiting" class="auto-play">Autoplay</button>
-  <br>
 
   <!-----
   <div class="box3 sb13">I'm speech bubble</div>
   <div class="box3 sb14">I'm speech bubble</div>--->
 
   <div class="game" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-    <div *ngFor="let number of numbers; let i = index">
-        <div class="box3" [ngClass]="(i%2==0)?'sb13':'sb14'">{{createTurnStr(number, i)}}</div>
+  <div *ngFor="let number of numbers; let i = index" class="box3" [ngClass]="{
+          'sb13 client': (isInitiator && i%2==0) || (!isInitiator && i%2==1),
+          'sb14 opponent' : (!isInitiator && i%2==0 || isInitiator && i%2==1)
+        }">{{createTurnStr(number, i)}}
     </div>
   </div>
 
-  <form class="set-number">
-    <label for="set-number" class="col-sm-2">Your Turn:</label>
+  <form class="set-number col-sm-2">
+    <label for="set-number" class="your-turn-label">Your Turn:</label>
     <button (click)="makeTurn(-1)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">-1</button>
     <button (click)="makeTurn(0)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">0</button>
     <button (click)="makeTurn(1)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">+1</button>
   </form>
 
- <div *ngIf="isWinner">
-   You are the winner! Congratulations!
- </div>
- <div *ngIf="isWinner === false">
-   You have lost :(
- </div>
-<div *ngIf="isTimeout">
-    No response from the opponent. Please restart.  
-</div>
+  <br>
+  <div class="col-sm-2" style="clear:both;">
+  <button (click)="isAutoplay = true; makeTurn();" [disabled]="isAutoplay || globals.isWaiting" [hidden]="isWinner !== undefined" 
+  [ngClass]="isAutoplay || globals.isWaiting ?'disabled':''" class="btn auto-play action-btn">Autoplay</button>
+  </div>
 
- <button (click)="replayTheGame()" *ngIf="isWinner !== undefined || isTimeout" >Replay</button>
+<div class="col-sm-2 game-msg">
+ <h3 *ngIf="isWinner">
+   You are a winner! Congratulations!
+ </h3>
+ <h3  *ngIf="isWinner === false">
+   You have lost :(
+ </h3>
+ <h3 *ngIf="isTimeout">
+    No response from the opponent. Please restart.  
+ </h3>
+<br>
+</div>
+<div class="col-sm-1">
+ <button (click)="replayTheGame()" *ngIf="isWinner !== undefined || isTimeout" class="action-btn">Replay</button>
+ </div>
 

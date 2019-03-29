@@ -1,5 +1,5 @@
 .auto-play, .game{
-    float: right;
+
 }
 .btn-choice{
   width: 40px;
@@ -17,14 +17,19 @@
   height: xyz;
   margin: 0px;
   padding: 0px;
+  float: right;
+  width: 200px;
+  margin-right: 150px;
 }
 
+.game-msg{
+  clear: both;
+}
   
  .box3 {
     width: 300px;
-    margin: 50px auto;
+    margin: 15px auto;
     border-radius: 15px;
-    background: #00bfb6;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -41,9 +46,7 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 15px solid #00bfb6;
-    border-right: 15px solid transparent;
-    border-top: 15px solid #00bfb6;
+    border-right: 15px solid transparent !important;
     border-bottom: 15px solid transparent;
     right: -16px;
     top: 0px;
@@ -57,13 +60,34 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 15px solid transparent;
-    border-right: 15px solid #00bfb6;
-    border-top: 15px solid #00bfb6;
+    border-left: 15px solid transparent !important;
     border-bottom: 15px solid transparent;
     left: -16px;
     top: 0px;
   }
+
+  .client:before{
+    border-left: 15px solid #ffce99;
+    border-right: 15px solid #ffce99;
+    border-top: 15px solid #ffce99;
+  }
+
+  .client{
+    background:  #ffce99;
+    float:right;
+  }
+
+  .opponent:before {
+    border-left: 15px solid #ff9999;
+    border-right: 15px solid #ff9999;
+    border-top: 15px solid #ff9999;
+  }
+  
+  .opponent{
+    background-color:   #ff9999;
+    float: left;
+  }
+  
   
   
   
@@ -86,3 +110,46 @@
     text-transform: capitalize;
     letter-spacing: 1px;
   }
+
+  .your-turn-label{
+    margin-right: 15px;
+  }
+
+  .btn-primary.raised {
+    box-shadow: 0 3px 0 0 #007299;
+}
+.btn-primary.raised:active, .btn-primary.raised.active {
+    background: #33a6cc;
+    box-shadow: none;
+    margin-bottom: -3px;
+    margin-top: 3px;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+.action-btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.action-btn:focus, .action-btn:active:focus, .action-btn.active:focus {
+    outline: 0 none;
+}
+
+.action-btn {
+    background: #0099cc;
+    color: #ffffff;
+}
+.action-btn:hover, .action-btn:focus, .action-btn:active, .action-btn.active, .open > .dropdown-toggle.action-btn {
+    background: #33a6cc;
+}
+.action-btn:active, .action-btn.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+

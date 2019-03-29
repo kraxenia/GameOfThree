@@ -42,7 +42,7 @@ export class GameProcessComponent implements OnInit, OnChanges {
   }
 
   createTurnStr(num, i){
-    let str = i!=0 ? `${num}*3/3=` : "";
+    let str = i!=0 ? num*3 +"/3=" : "";
     str+=num;
     return str;
   }

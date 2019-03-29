@@ -20,7 +20,6 @@ export class AppComponent {
     chatService.messages.subscribe(msg => {
       globals.error = '';
       this.clientId = msg.recipient;
-      this.isInitiator = false;
       this.opponent = msg.author;
       globals.isWaiting = false;
 
@@ -56,7 +55,7 @@ export class AppComponent {
   onAnswer(response){
     this.condition = response ? ConditionType.Game : ConditionType.Idle;      
   }
-  
+
   copyMessage(val: string){
     let selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';

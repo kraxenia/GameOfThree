@@ -6,8 +6,23 @@ h1 {
 .copy-btn{
   float: left;
 }
+
+.spinner {
+  height: 50px;
+  width: 50px;
+}
+
 .client-id{
   font-weight:bold;
   margin-right: 40px;
   margin-left: 20px;
+}
+
+.client-color{
+  background:  #ffce99;
+}
+
+.opponent-color{
+  background-color:   #ff9999;
+
 }
