@@ -1,5 +1,9 @@
 {
   "name": "angular-io-example",
+  "engines": {
+    "node": ">=50.9",
+    "npm": ">=6.0.0"
+  },
   "version": "1.0.0",
   "private": true,
   "description": "Example project from an angular.io guide.",

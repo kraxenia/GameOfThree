@@ -4,7 +4,7 @@
   <div class="box3 sb13">I'm speech bubble</div>
   <div class="box3 sb14">I'm speech bubble</div>--->
 
-  <div class="game" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div class="game" style="overflow-y: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div *ngFor="let number of numbers; let i = index" class="box3" [ngClass]="{
           'sb13 client': (isInitiator && i%2==0) || (!isInitiator && i%2==1),
           'sb14 opponent' : (!isInitiator && i%2==0 || isInitiator && i%2==1)
@@ -21,7 +21,7 @@
 
   <br>
   <div class="col-sm-2" style="clear:both;">
-  <button (click)="isAutoplay = true; makeTurn();" [disabled]="isAutoplay || globals.isWaiting" [hidden]="isWinner !== undefined" 
+  <button (click)="isAutoplay = true; makeTurn(null);" [disabled]="isAutoplay || globals.isWaiting" [hidden]="isWinner !== undefined" 
   [ngClass]="isAutoplay || globals.isWaiting ?'disabled':''" class="btn auto-play action-btn">Autoplay</button>
   </div>
 
