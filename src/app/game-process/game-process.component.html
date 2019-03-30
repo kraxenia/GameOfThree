@@ -8,11 +8,11 @@
   <div *ngFor="let number of numbers; let i = index" class="box3" [ngClass]="{
           'sb13 client': (isInitiator && i%2==0) || (!isInitiator && i%2==1),
           'sb14 opponent' : (!isInitiator && i%2==0 || isInitiator && i%2==1)
-        }">{{createTurnStr(number, i)}}
+        }">{{createTurnStr(numbers, i)}}
     </div>
   </div>
 
-  <form class="set-number col-sm-2">
+  <form class="set-number col-sm-3">
     <label for="set-number" class="your-turn-label">Your Turn:</label>
     <button (click)="makeTurn(-1)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">-1</button>
     <button (click)="makeTurn(0)" class="btn btn-outline-info btn-choice" [disabled]="globals.isWaiting || isWinner !== undefined || isAutoplay">0</button>
